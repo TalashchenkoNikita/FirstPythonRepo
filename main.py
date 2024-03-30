@@ -8,9 +8,8 @@ def get_days_from_today(date):
         datetime_from_past = datetime.strptime(date, "%Y-%m-%d")
         current_date = datetime.now()
         return current_date.toordinal() - datetime_from_past.toordinal()
-    finally:
-        print("Incorrect data, must be in format 'year-month-day', try again")
-        return None
+    except ValueError:
+         print("Incorrect data, must be in format 'year-month-day', try again")
 
 def get_numbers_ticket(min, max, quantity):
     lottery_numbers = set()
@@ -18,6 +17,7 @@ def get_numbers_ticket(min, max, quantity):
         random_number = random.randint(min, max)
         lottery_numbers.add(random_number)
     return sorted(lottery_numbers)
+
 
 def get_upcoming_birthdays(users):
     upcoming_birthdays_list = []
@@ -36,6 +36,7 @@ def get_upcoming_birthdays(users):
                                         (next_birthday_date + timedelta(days=7-next_birthday_date.weekday())).strftime("%Y.%m.%d")})
             upcoming_birthdays_list.append(birthday_person)
     return upcoming_birthdays_list
+
 
 def normalize_phone(phone_number):
     normalize_phone_number = re.sub("/D", "", phone_number)
